@@ -1,0 +1,11 @@
+{
+  "name": "backend_prorep",
+  "version": "1.0.0",
+  "description": "Progress Report App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Justin Herpin",
+  "license": "ISC"
+}

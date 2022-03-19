@@ -18,4 +18,5 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     res.status(200).json({message: `Successfully Removed Course: ${req.params.id}`})
 })
+
 module.exports = router

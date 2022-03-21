@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getCourses, addCourse, updateCourse, deleteCourse} = require('../Controllers/coursesController')
+const {getCourses, addCourse, updateCourse, deleteCourse} = require('../controllers/coursesController')
 
 
 router.get('/', getCourses)

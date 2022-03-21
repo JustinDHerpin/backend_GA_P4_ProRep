@@ -1,3 +1,6 @@
+const mongoose = require('../db/connection')
+// const User = require('./user')
+
 const userSchema = new mongoose.Schema({
 
     name: { type: String, required: true },

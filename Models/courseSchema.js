@@ -1,4 +1,4 @@
-// const mongoose = require('../db/connection')
+const mongoose = require('../db/connection')
 // const User = require('./user')
 
 const courseSchema = new mongoose.Schema({

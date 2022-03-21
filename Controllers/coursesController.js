@@ -67,7 +67,18 @@ const updateCourse = asyncHandler(async (req, res) => {
 // @access Private
 
 const deleteCourse = asyncHandler(async (req, res) => {
-    res.status(200).json({message: `Course Successfully Deleted: ${req.params.id} `})
+    const course = await Course.findById(req.params.id)
+
+
+    if(!course) {
+        res.status(400)
+        throw new Error('No course found')
+    }
+
+    await course.remove()
+
+    // res.status(200).json({message: `Course Successfully Deleted: ${req.params.id} `})
+    res.status(200).json({ id: req.params.id })
 })
 
 

@@ -47,7 +47,17 @@ const addCourse = asyncHandler(async (req, res) => {
 // @access Private
 
 const updateCourse = asyncHandler(async (req, res) => {
-    res.status(200).json({message: `Course Successfully Updated: ${req.params.id} `})
+    const course = await Course.findById(req.params.id)
+
+    if(!course) {
+        res.status(400)
+        throw new Error('no course found')
+    }
+
+    const updatedCourse = await Course.findByIdAndUpdate(req.params.id, req.body, {new: true,})
+
+    // res.status(200).json({message: `Course Successfully Updated: ${req.params.id} `})
+    res.status(200).json(updatedCourse)
 })
 
 

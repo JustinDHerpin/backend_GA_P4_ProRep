@@ -1,12 +1,16 @@
 const asyncHandler = require('express-async-handler')
 
+const Course = require('../Models/courseSchema')
 
 // @desc Get Courses
 // @route GET /api/v1/courses
 // @access Private
 
 const getCourses = asyncHandler(async (req, res) => {
-    res.status(200).json({message: 'Get Courses'})
+    const courses = await Course.find()
+
+    // res.status(200).json({message: 'Get Courses'})
+    res.status(200).json(courses)
 })
 
 
@@ -16,12 +20,24 @@ const getCourses = asyncHandler(async (req, res) => {
 // @access Private
 
 const addCourse = asyncHandler(async (req, res) => {
-    if(!req.body.name) {
+    if(!req.body) {
         res.status(400)
         throw new Error('Please complete the form and try again.')
     }
+
+    const newCourse = ({
+       ...req.body,
+    })
+
+    console.log(req.body.name)
+    console.log(newCourse)
+
+    const createdCourse = await Course.create(
+        newCourse,
+    )
     
-    res.status(201).json({message: `New Course Successfully Added: ${req.params.id}`})
+    // res.status(201).json({message: `New Course Successfully Added: ${req.params.id}`})
+    res.status(201).json(createdCourse)
 })
 
 

@@ -8,6 +8,7 @@ const Course = require('../Models/courseSchema')
 
 const getCourses = asyncHandler(async (req, res) => {
     const courses = await Course.find()
+    // const courses = await Course.find({ user: req.user.id })
 
     // res.status(200).json({message: 'Get Courses'})
     res.status(200).json(courses)

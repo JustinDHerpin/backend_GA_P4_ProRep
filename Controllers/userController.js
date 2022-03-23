@@ -33,7 +33,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        isAdmin,
     })
 
     if(user) {
@@ -41,6 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
             token: generateToken(user._id),
         })
     } else {
@@ -67,6 +69,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
             token: generateToken(user._id),
         })
 
@@ -83,12 +86,13 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getMe = asyncHandler(async (req, res) => {
-    const { _id, name, email } = await User.findById(req.user.id)
+    const { _id, name, email, isAdmin } = await User.findById(req.user.id)
 
     res.status(200).json({
         id: _id,
         name,
-        email
+        email,
+        isAdmin,
     })
 })
 

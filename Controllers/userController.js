@@ -6,7 +6,7 @@ const User = require('../Models/userSchema')
 
 
 // @desc    Register new user
-// @route   POST /api/users
+// @route   POST /api/users/register
 // @access  Public
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 // @desc    Authenticate a user
-// @route   POST /api/users/login
+// @route   POST /api/users
 // @access  Public
 
 const loginUser = asyncHandler(async (req, res) => {

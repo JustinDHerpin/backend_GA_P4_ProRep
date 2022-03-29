@@ -1,20 +1,32 @@
 // const mongoose = require('../db/connection')
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 // const User = require('./user')
 
-const courseSchema = new mongoose.Schema({
-    
+const courseSchema = new mongoose.Schema(
+  {
     name: { type: String, required: true },
-    lessons: [{ type: String, required: true}],
-    homeworks: [{ type: String }],
+    lessons: [
+      {
+        lessonName: { type: String },
+        lessonLink: { type: String },
+        labName: { type: String },
+        labLink: { type: String },
+        homeworkName: { type: String },
+        homeworkLink: { type: String },
+        homeworkDue: { type: String },
+        homeworkDone: { type: Boolean, default: false },
+        recordingLink: { type: String },
+        recordingPassword: { type: String },
+      },
+    ],
 
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true })
-
-
-const Course = mongoose.model('Course', courseSchema)
-module.exports = Course
+const Course = mongoose.model("Course", courseSchema);
+module.exports = Course;

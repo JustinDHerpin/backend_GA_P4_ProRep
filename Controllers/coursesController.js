@@ -6,7 +6,6 @@ const Course = require("../Models/courseSchema");
 // @desc Get Courses
 // @route GET /api/v1/courses
 // @access Private
-
 const getCourses = asyncHandler(async (req, res) => {
   const courses = await Course.find();
   // const courses = await Course.find({ user: req.user.id })
@@ -15,10 +14,20 @@ const getCourses = asyncHandler(async (req, res) => {
   res.status(200).json(courses);
 });
 
+// @desc Get all available Courses
+// @route GET /api/v1/courses
+// @access Private
+// const getAllCourses = asyncHandler(async (req, res) => {
+//   const allCourses = await Course.find();
+//   // const courses = await Course.find({ user: req.user.id })
+
+//   // res.status(200).json({message: 'Get Courses'})
+//   res.status(200).json(courses);
+// });
+
 // @desc Add a course
 // @route POST /api/v1/courses
 // @access Private
-
 const addCourse = asyncHandler(async (req, res) => {
   if (!req.body) {
     res.status(400);
@@ -63,7 +72,6 @@ const updateCourse = asyncHandler(async (req, res) => {
 // @desc Delete a course
 // @route DELETE /api/v1/courses/:id
 // @access Private
-
 const deleteCourse = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id);
 

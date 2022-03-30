@@ -4,11 +4,11 @@ const colors = require("colors");
 const dotenv = require("dotenv").config();
 const { errorHandler } = require("./middleware/errorMiddleware");
 // const port = process.env.PORT || 5000;
-app.set("port", process.env.PORT || 5000);
 const mongoose = require("./db/connection");
 
 const app = express();
 
+app.set("port", process.env.PORT || 5000);
 // const Course = require('./models/courseSchema.js')
 // const Wine = require('./models/wineSchema')
 app.use(cors());

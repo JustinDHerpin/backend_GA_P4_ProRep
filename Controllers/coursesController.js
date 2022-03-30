@@ -1,29 +1,25 @@
 const asyncHandler = require("express-async-handler");
 
-const Course = require("../Models/courseSchema");
+const Course = require("../Models/mvpCourseSchema");
 // const User = require("../models/userSchema");
 
 // @desc Get Courses
 // @route GET /api/v1/courses
 // @access Private
 const getCourses = asyncHandler(async (req, res) => {
-  const courses = await Course.find();
-  // const courses = await Course.find({ user: req.user.id })
+  const courses = await Course.find({ owner: req.user.id });
 
-  // res.status(200).json({message: 'Get Courses'})
   res.status(200).json(courses);
 });
 
 // @desc Get all available Courses
-// @route GET /api/v1/courses
+// @route GET /api/v1/courses/all //  adding all here for test
 // @access Private
-// const getAllCourses = asyncHandler(async (req, res) => {
-//   const allCourses = await Course.find();
-//   // const courses = await Course.find({ user: req.user.id })
+const getAllCourses = asyncHandler(async (req, res) => {
+  const allCourses = await Course.find();
 
-//   // res.status(200).json({message: 'Get Courses'})
-//   res.status(200).json(courses);
-// });
+  res.status(200).json(allCourses);
+});
 
 // @desc Add a course
 // @route POST /api/v1/courses
@@ -38,12 +34,8 @@ const addCourse = asyncHandler(async (req, res) => {
     ...req.body,
   };
 
-  console.log(req.body.name);
-  console.log(newCourse);
-
   const createdCourse = await Course.create(newCourse);
 
-  // res.status(201).json({message: `New Course Successfully Added: ${req.params.id}`})
   res.status(201).json(createdCourse);
 });
 
@@ -65,7 +57,6 @@ const updateCourse = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  // res.status(200).json({message: `Course Successfully Updated: ${req.params.id} `})
   res.status(200).json(updatedCourse);
 });
 
@@ -88,6 +79,7 @@ const deleteCourse = asyncHandler(async (req, res) => {
 
 module.exports = {
   getCourses,
+  getAllCourses,
   addCourse,
   updateCourse,
   deleteCourse,

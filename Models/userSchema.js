@@ -1,28 +1,21 @@
-const mongoose = require('../db/connection')
-// const User = require('./user')
+const mongoose = require("../db/connection");
 
-const userSchema = new mongoose.Schema({
-
-    name: { type: String, required: [true, 'Please add a name']},
-    email: { type: String, required: [true, 'Please add an email adress'], unique: true },
-    password: { type: String, required: [true, 'Please enter a password']},
-    isAdmin: { type: Boolean, default: false },
-    
-    // students: [{ type: String, required: true}], // click on course add to their array?
-    homeworks: [{ type: String }],
-
-    // owner: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // },
-
-    lesson: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Lesson',                            // should this be 'Lesson' ???  give lesson id here
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: [true, "Please add a name"] },
+    email: {
+      type: String,
+      required: [true, "Please add an email adress"],
+      unique: true,
     },
-    
-}, { timestamps: true })
-    
+    password: { type: String, required: [true, "Please enter a password"] },
+    isAdmin: { type: Boolean, default: false },
 
-const User = mongoose.model('User', userSchema)
-module.exports = User
+    // students: [{ type: String, required: true}], // click on course add to their array?
+    // homeworks: [{ type: String }],
+  },
+  { timestamps: true }
+);
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;

@@ -6,7 +6,7 @@ const {
   addCourse,
   updateCourse,
   deleteCourse,
-} = require("../controllers/coursesController");
+} = require("../Controllers/coursesController");
 const { protect } = require("../middleware/authMiddleware");
 
 router.get("/", protect, getCourses);

@@ -15,6 +15,11 @@ app.use(cors());
 // app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.all("/", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.use("/api/v1/courses", require("./routes/coursesRoutes"));
 app.use("/api/v1/users", require("./routes/userRoutes"));

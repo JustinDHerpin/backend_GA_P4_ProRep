@@ -1,4 +1,6 @@
 const asyncHandler = require("express-async-handler");
+const { default: mongoose } = require("mongoose");
+const { isObjectIdOrHexString } = require("../db/connection");
 
 const Course = require("../Models/mvpCourseSchema");
 // const User = require("../models/userSchema");
@@ -30,13 +32,21 @@ const addCourse = asyncHandler(async (req, res) => {
     throw new Error("Please complete the form and try again.");
   }
 
+  console.log(req.body);
+
   const newCourse = {
     ...req.body,
+    _id: new mongoose.Types.ObjectId(), //remove if it doesn't work
+    // owner: req.user.id,
+    // { new: true },
   };
 
-  const createdCourse = await Course.create(newCourse);
+  console.log(newCourse);
 
-  res.status(201).json(createdCourse);
+  // const createdCourse = await Course.create(newCourse).select("-_id");
+  // const createdCourse = await Course.create(newCourse);
+
+  res.status(201).json(newCourse);
 });
 
 // @desc Update a course

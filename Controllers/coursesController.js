@@ -37,16 +37,16 @@ const addCourse = asyncHandler(async (req, res) => {
   const newCourse = {
     ...req.body,
     _id: new mongoose.Types.ObjectId(), //remove if it doesn't work
-    // owner: req.user.id,
+    owner: req.user.id,
     // { new: true },
   };
 
   console.log(newCourse);
 
   // const createdCourse = await Course.create(newCourse).select("-_id");
-  // const createdCourse = await Course.create(newCourse);
+  const createdCourse = await Course.create(newCourse);
 
-  res.status(201).json(newCourse);
+  res.status(201).json(createdCourse);
 });
 
 // @desc Update a course

@@ -18,7 +18,8 @@ const getCourses = asyncHandler(async (req, res) => {
 // @route GET /api/v1/courses/all //  adding all here for test
 // @access Private
 const getAllCourses = asyncHandler(async (req, res) => {
-  const allCourses = await Course.find();
+  // const allCourses = await Course.find();
+  const allCourses = await Course.find({ owner: null });
 
   res.status(200).json(allCourses);
 });
@@ -45,8 +46,11 @@ const addCourse = asyncHandler(async (req, res) => {
 
   // const createdCourse = await Course.create(newCourse).select("-_id");
   const createdCourse = await Course.create(newCourse);
-
-  res.status(201).json(createdCourse);
+  if (createdCourse) {
+    let courses = await Course.find({ owner: req.user.id });
+    console.log(courses + "this is what we are checking");
+    res.status(201).json(courses);
+  }
 });
 
 // @desc Update a course
@@ -66,8 +70,12 @@ const updateCourse = asyncHandler(async (req, res) => {
     req.body,
     { new: true }
   );
-
-  res.status(200).json(updatedCourse);
+  console.log("updatedCourse ffrom line 70" + updateCourse);
+  if (updatedCourse) {
+    let courses = await Course.find({ owner: req.user.id });
+    console.log(courses + "<=================================");
+    res.status(200).json(courses);
+  }
 });
 
 // @desc Delete a course
